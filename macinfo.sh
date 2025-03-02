@@ -110,7 +110,7 @@ get_network_info() {
         echo -e "  ${BOLD}Wi-Fi:${RESET} $wifi_ssid (Channel: $wifi_channel)"
     fi
     
-    #Get IP addresses
+    #Get IP
     echo -e "  ${BOLD}IP (Local):${RESET} $(ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}' | head -n 1)"
     
     #Get public IP (if network is available)
@@ -120,7 +120,7 @@ get_network_info() {
 }
 
 get_battery_info() {
-    #Only run on laptops
+    #Only run on laptops with battery
     if system_profiler SPPowerDataType | grep -q "Battery Information"; then
         local batt_percent=$(pmset -g batt | grep -o '[0-9]*%' | tr -d '%')
         local batt_status=$(pmset -g batt | grep -o 'discharging|charging|AC attached' | head -n 1)
